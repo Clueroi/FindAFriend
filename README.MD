@@ -23,3 +23,4 @@
 [] A senha do usário precisa estar criptografada
 [] Os dados da aplicação precisam estar persistidos em um postgres
 [] Os itens listados precisam estar limitados a 20 itens por página
+[] Usuário e oORG identificados por um JWT
