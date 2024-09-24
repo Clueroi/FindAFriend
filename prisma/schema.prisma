@@ -45,7 +45,7 @@ enum Env {
 model User {
   id            String @id @default(uuid())
   name          String
-  email         String
+  email         String @unique
   password_hash String
 
   @@map("users")
@@ -54,7 +54,7 @@ model User {
 model Organization {
   id            String  @id @default(uuid())
   name          String
-  email         String
+  email         String  @unique
   cep           String
   endereco      String
   whatsapp      Decimal
