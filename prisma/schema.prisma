@@ -13,21 +13,71 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Age {
+  filhote
+  adulta
+  velhice
+}
 
+enum Body {
+  pequeno
+  medio
+  grande
+}
 
+enum Independence {
+  baixa
+  media
+  alta
+}
 
+enum Energy {
+  baixa
+  media
+  alta
+}
+
+enum Env {
+  amplo
+  fechado
+}
+
+model User {
+  id            String @id @default(uuid())
+  name          String
+  email         String
+  password_hash String
+
+  @@map("users")
+}
 
 model Organization {
-  id String @id @default(uuid())
-  name String
-  email String
-  cep String 
-  endereco String
-  whatsapp Decimal
-  password String
-
-  
+  id            String  @id @default(uuid())
+  name          String
+  email         String
+  cep           String
+  endereco      String
+  whatsapp      Decimal
+  password_hash String
+  pet           Pet     @relation(fields: [petId], references: [id])
+  petId         String
 
   @@map("orgs")
 }
 
+model Pet {
+  id           String       @id @default(uuid())
+  name         String
+  description  String?
+  age          Age          @default(filhote)
+  body         Body         @default(pequeno)
+  energy       Energy       @default(baixa)
+  independence Independence @default(baixa)
+  env          Env          @default(amplo)
+  image        String
+  requirements String
+
+  Organization Organization[]
+
+  @@map("pets")
+}
