@@ -13,27 +13,5 @@ import { z } from "zod"
     
         const {name, email, password} = registerUserSchema.parse(request.body)
 
-        const userWithSameEmail = await prisma.user.findUnique({
-            where:{
-                email
-            }
-        })
-
-        if(userWithSameEmail){
-            reply.status(409).send('User already exists')
-            throw new Error
-        }
-
-        const password_hash = await hash(password, 6)
-    
-    
-        await prisma.user.create({
-            data:{
-                name,
-                email,
-                password_hash
-            }
-        })
-    
-        return reply.status(201).send()
+        
     }
