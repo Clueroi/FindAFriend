@@ -1,5 +1,4 @@
-import { prisma } from "@/lib/prisma"
-import { hash } from "bcryptjs"
+import { registerUseCase } from "@/use-cases/register-use-case"
 import { FastifyReply, FastifyRequest } from "fastify"
 import { z } from "zod"
 
@@ -12,6 +11,9 @@ import { z } from "zod"
         })
     
         const {name, email, password} = registerUserSchema.parse(request.body)
-
         
+            await registerUseCase({name, email, password})
+            reply.status(201).send()
+        
+
     }
