@@ -1,28 +1,28 @@
 
 ## RFs
 
-[x] Deve ser possível cadastrar um usuário
-[x] Deve ser possível se cadastrar como uma ORG
-[] Deve ser possível cadastrar um pet
-[] Deve ser possível visualizar detalhes de um pet para adoção
-[] Deve ser possível listar todos os pets disponíveis para adoção em uma cidade
-[] Deve ser possível filtrar pets por suas características
-[] Deve ser possível realizar login como um usuário
-[] Deve ser possível realizar login como uma ORG
+- [x] Deve ser possível cadastrar um usuário
+- [x] Deve ser possível se cadastrar como uma ORG
+- [] Deve ser possível cadastrar um pet
+- [] Deve ser possível visualizar detalhes de um pet para adoção
+- [] Deve ser possível listar todos os pets disponíveis para adoção em uma cidade
+- [] Deve ser possível filtrar pets por suas características
+- [] Deve ser possível realizar login como um usuário
+- [] Deve ser possível realizar login como uma ORG
 
 
 ## RNs
 
-[] Para listar os pets, obrigatoriamente precisamos informar a cidade
-[] Uma ORG precisa ter um endereço e um número de WhatsApp
-[] Um pet deve estar ligado a uma ORG
-[] O usuário que quer adotar, entrará em contato com a ORG via WhatsApp
-[] Todos os filtros, além da cidade, são opcionais
-[] Para uma ORG acessar a aplicação como admin, ela precisa estar logada
+- [] Para listar os pets, obrigatoriamente precisamos informar a cidade
+- [] Uma ORG precisa ter um endereço e um número de WhatsApp
+- [] Um pet deve estar ligado a uma ORG
+- [] O usuário que quer adotar, entrará em contato com a ORG via WhatsApp
+- [] Todos os filtros, além da cidade, são opcionais
+- [] Para uma ORG acessar a aplicação como admin, ela precisa estar logada
 
 ## RNFs
 
-[] A senha do usário precisa estar criptografada
-[] Os dados da aplicação precisam estar persistidos em um postgres
-[] Os itens listados precisam estar limitados a 20 itens por página
-[] Usuário e oORG identificados por um JWT
+- [] A senha do usário precisa estar criptografada
+- [] Os dados da aplicação precisam estar persistidos em um postgres
+- [] Os itens listados precisam estar limitados a 20 itens por página
+- [] Usuário e oORG identificados por um JWT
