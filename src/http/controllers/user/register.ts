@@ -20,6 +20,8 @@ import { z } from "zod"
             await registerUseCase.execute({
                 name, email, password
             })
+
+            reply.status(201).send()
         } catch(err){
             return reply.status(409).send()
         }

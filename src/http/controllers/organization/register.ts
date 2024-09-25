@@ -40,7 +40,7 @@ export async function Register(request: FastifyRequest, reply: FastifyReply) {
         return reply.status(201).send('Organization Created')
 
     }catch(err){
-        reply.status(400).send()
+        reply.status(409).send()
     }
 
 }
