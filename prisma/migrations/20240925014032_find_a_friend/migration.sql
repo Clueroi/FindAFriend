@@ -32,7 +32,7 @@ CREATE TABLE "orgs" (
     "endereco" TEXT NOT NULL,
     "whatsapp" DECIMAL(65,30) NOT NULL,
     "password_hash" TEXT NOT NULL,
-    "petId" TEXT NOT NULL,
+    "petId" TEXT,
 
     CONSTRAINT "orgs_pkey" PRIMARY KEY ("id")
 );
@@ -60,4 +60,4 @@ CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 CREATE UNIQUE INDEX "orgs_email_key" ON "orgs"("email");
 
 -- AddForeignKey
-ALTER TABLE "orgs" ADD CONSTRAINT "orgs_petId_fkey" FOREIGN KEY ("petId") REFERENCES "pets"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "orgs" ADD CONSTRAINT "orgs_petId_fkey" FOREIGN KEY ("petId") REFERENCES "pets"("id") ON DELETE SET NULL ON UPDATE CASCADE;

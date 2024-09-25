@@ -59,8 +59,8 @@ model Organization {
   endereco      String
   whatsapp      Decimal
   password_hash String
-  pet           Pet     @relation(fields: [petId], references: [id])
-  petId         String
+  pet           Pet?    @relation(fields: [petId], references: [id])
+  petId         String?  @default(uuid())
 
   @@map("orgs")
 }
