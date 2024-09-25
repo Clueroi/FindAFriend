@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma"
+import { OrgsRepository } from "@/repositories/org-repository"
 import { hash } from "bcryptjs"
 
 
@@ -13,16 +14,13 @@ interface RegisterOrgsParams {
 
 export class RegisterOrgsUseCase {
 
-    constructor(private orgsRepository: any) { }
+    constructor(private orgsRepository: OrgsRepository) { }
 
     async execute({ name, email, cep, endereco, whatsapp, password }: RegisterOrgsParams) {
         const password_hash = await hash(password, 6)
 
-        const sameWhatsappNumber = await prisma.organization.findUnique({
-            where: {
-                whatsapp
-            }
-        })
+        const sameWhatsappNumber = await this.orgsRepository.findByEmail(email)
+        
 
         const sameEmail = await prisma.organization.findUnique({
             where: {
@@ -37,6 +35,7 @@ export class RegisterOrgsUseCase {
         if (sameEmail) {
             throw new Error('E-mail not able')
         }
+        
 
         await this.orgsRepository.create({
             cep,
