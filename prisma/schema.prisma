@@ -57,10 +57,10 @@ model Organization {
   email         String  @unique
   cep           String
   endereco      String
-  whatsapp      Decimal
+  whatsapp      Decimal @unique
   password_hash String
   pet           Pet?    @relation(fields: [petId], references: [id])
-  petId         String?  @default(uuid())
+  petId         String? @default(uuid())
 
   @@map("orgs")
 }

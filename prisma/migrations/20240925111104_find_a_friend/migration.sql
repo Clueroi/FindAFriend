@@ -59,5 +59,8 @@ CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 -- CreateIndex
 CREATE UNIQUE INDEX "orgs_email_key" ON "orgs"("email");
 
+-- CreateIndex
+CREATE UNIQUE INDEX "orgs_whatsapp_key" ON "orgs"("whatsapp");
+
 -- AddForeignKey
 ALTER TABLE "orgs" ADD CONSTRAINT "orgs_petId_fkey" FOREIGN KEY ("petId") REFERENCES "pets"("id") ON DELETE SET NULL ON UPDATE CASCADE;
