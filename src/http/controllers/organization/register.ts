@@ -15,7 +15,7 @@ export async function Register(request: FastifyRequest, reply: FastifyReply) {
         password: z.string(),
     })
 
-    const { 
+    const {
         name,
         email,
         cep,
@@ -24,11 +24,11 @@ export async function Register(request: FastifyRequest, reply: FastifyReply) {
         password,
     } = registerOrganizationSchema.parse(request.body)
 
-    try{
+    try {
         const prismaConnection = new PrismaOrgsRepository()
         const registerUseCase = new RegisterOrgsUseCase(prismaConnection)
 
-        registerUseCase.execute({
+        await registerUseCase.execute({
             name,
             email,
             cep,
@@ -36,11 +36,11 @@ export async function Register(request: FastifyRequest, reply: FastifyReply) {
             whatsapp,
             password,
         })
-        
+
         return reply.status(201).send('Organization Created')
 
-    }catch(err){
-        reply.status(409).send()
+    } catch (err) {
+        return reply.status(409).send()
     }
 
 }
