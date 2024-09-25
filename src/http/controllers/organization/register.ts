@@ -1,5 +1,5 @@
-import { prisma } from "@/lib/prisma";
-import { hash } from "bcryptjs";
+import { PrismaOrgsRepository } from "@/repositories/prisma/prisma-orgs-repository";
+import { RegisterOrgsUseCase } from "@/use-cases/register-orgs-use-case";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
@@ -15,7 +15,8 @@ export async function Register(request: FastifyRequest, reply: FastifyReply) {
         password: z.string(),
     })
 
-    const { name,
+    const { 
+        name,
         email,
         cep,
         endereco,
@@ -23,17 +24,23 @@ export async function Register(request: FastifyRequest, reply: FastifyReply) {
         password,
     } = registerOrganizationSchema.parse(request.body)
 
-    const password_hash = await hash(password, 6)
+    try{
+        const prismaConnection = new PrismaOrgsRepository()
+        const registerUseCase = new RegisterOrgsUseCase(prismaConnection)
 
-    await prisma.organization.create({
-        data:{
-            cep,
-            email,
-            endereco,
+        registerUseCase.execute({
             name,
-            password_hash,
+            email,
+            cep,
+            endereco,
             whatsapp,
-        }
-    })
+            password,
+        })
+        
+        return reply.status(201).send('Organization Created')
+
+    }catch(err){
+        reply.status(400).send()
+    }
 
 }
