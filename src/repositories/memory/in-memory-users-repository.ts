@@ -1,14 +1,38 @@
-import { prisma } from "@/lib/prisma";
-import { Prisma } from "@prisma/client";
+import { Prisma, User } from "@prisma/client";
+import { UserRepository } from "../user-repository";
 
-export class inMemoryUserRepository{
+export class inMemoryUserRepository implements UserRepository {
+    public users: User[] = []
 
-    public users:any = []
 
-    async Create(data:Prisma.UserCreateInput){
-        await this.users.push({
-            data
-        })
+    async create(data: Prisma.UserCreateInput) {
+
+        const user = {
+            id: 'user-id',
+            email: 'test@gmail.com',
+            name: 'user-name',
+            password_hash: data.password_hash,
+            created_at: new Date()
+        }
+
+        this.users.push(user)
+
+        return user
+
     }
+
+    async findByEmail(email: string) {
+
+        const user = this.users.find(item => item.email === email)
+
+        if (!user) {
+            return null
+        }
+
+        return user
+    }
+
+
+
 
 }
