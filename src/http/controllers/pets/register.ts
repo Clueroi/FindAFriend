@@ -28,7 +28,7 @@ export async function RegisterPets(request: FastifyRequest, reply:FastifyReply) 
         requirements, } = petsBodySchema.parse(request.body)
 
 
-    const pet = await prisma.pet.create({
+    await prisma.pet.create({
         data:{
         name,
         description,
@@ -45,5 +45,5 @@ export async function RegisterPets(request: FastifyRequest, reply:FastifyReply) 
         }
     })
 
-    return reply.status(201)
+    return reply.status(201).send()
 }
