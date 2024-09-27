@@ -30,9 +30,9 @@ CREATE TABLE "orgs" (
     "email" TEXT NOT NULL,
     "cep" TEXT NOT NULL,
     "endereco" TEXT NOT NULL,
+    "city" TEXT NOT NULL,
     "whatsapp" DECIMAL(65,30) NOT NULL,
     "password_hash" TEXT NOT NULL,
-    "petId" TEXT,
 
     CONSTRAINT "orgs_pkey" PRIMARY KEY ("id")
 );
@@ -49,6 +49,7 @@ CREATE TABLE "pets" (
     "env" "Env" NOT NULL DEFAULT 'amplo',
     "image" TEXT NOT NULL,
     "requirements" TEXT NOT NULL,
+    "org_id" TEXT NOT NULL,
 
     CONSTRAINT "pets_pkey" PRIMARY KEY ("id")
 );
@@ -63,4 +64,4 @@ CREATE UNIQUE INDEX "orgs_email_key" ON "orgs"("email");
 CREATE UNIQUE INDEX "orgs_whatsapp_key" ON "orgs"("whatsapp");
 
 -- AddForeignKey
-ALTER TABLE "orgs" ADD CONSTRAINT "orgs_petId_fkey" FOREIGN KEY ("petId") REFERENCES "pets"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "pets" ADD CONSTRAINT "pets_org_id_fkey" FOREIGN KEY ("org_id") REFERENCES "orgs"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

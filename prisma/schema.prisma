@@ -57,10 +57,10 @@ model Organization {
   email         String  @unique
   cep           String
   endereco      String
+  city          String
   whatsapp      Decimal @unique
   password_hash String
-  pet           Pet?    @relation(fields: [petId], references: [id])
-  petId         String? @default(uuid())
+  pets          Pet[]
 
   @@map("orgs")
 }
@@ -76,8 +76,8 @@ model Pet {
   env          Env          @default(amplo)
   image        String
   requirements String
-
-  Organization Organization[]
+  org_id String
+  org Organization @relation(fields: [org_id], references: [id])
 
   @@map("pets")
 }

@@ -1,11 +1,10 @@
 import { it, describe, expect } from 'vitest'
 import { RegisterUseCase } from './register-user-use-case'
-import { PrismaUsersRepository } from '@/repositories/prisma/prisma-users-repository'
 import { compare } from 'bcryptjs'
 import { inMemoryUserRepository } from '@/repositories/memory/in-memory-users-repository'
 import { UserAlreadyExistsError } from './errors/user-already-existst-error'
 
-describe('Register use-case', () => {
+describe('Register user use-case', () => {
 
     it('should be able to hash user password', async () => {
         
@@ -25,26 +24,25 @@ describe('Register use-case', () => {
         console.log(user.password_hash)
     })
 
-    it('should not be able to login with same email', async () => {
+    it('should not be able to login with same email twice', async () => {
         
-        const usersRepository = new inMemoryUserRepository()
-        const registerUseCase = new RegisterUseCase(usersRepository)
+        const inMemoryRepository = new inMemoryUserRepository()
+        const sut = new RegisterUseCase(inMemoryRepository)
 
         const email = 'jhosoe@gmail.com'
 
-        await registerUseCase.execute({
+        await sut.execute({
             email,
             name: "jhon Doe",
             password: "123456"
         })
 
-        await expect(()=>{
-             registerUseCase.execute({
+        await expect(()=>
+            sut.execute({
                 email,
                 name: "jhon Doe",
                 password: "123456"
             })
-        }).rejects.toBeInstanceOf(UserAlreadyExistsError)
-
+        ).rejects.toBeInstanceOf(UserAlreadyExistsError)
     })
 })

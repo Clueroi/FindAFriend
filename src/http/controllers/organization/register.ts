@@ -14,6 +14,7 @@ export async function Register(request: FastifyRequest, reply: FastifyReply) {
         endereco: z.string(),
         whatsapp: z.number(),
         password: z.string(),
+        city:z.string()
     })
 
     const {
@@ -23,6 +24,7 @@ export async function Register(request: FastifyRequest, reply: FastifyReply) {
         endereco,
         whatsapp,
         password,
+        city
     } = registerOrganizationSchema.parse(request.body)
 
     try {
@@ -36,6 +38,7 @@ export async function Register(request: FastifyRequest, reply: FastifyReply) {
             endereco,
             whatsapp,
             password,
+            city
         })
 
         return reply.status(201).send('Organization Created')

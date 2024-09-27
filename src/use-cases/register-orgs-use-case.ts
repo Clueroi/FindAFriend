@@ -1,7 +1,7 @@
-import { prisma } from "@/lib/prisma"
 import { OrgsRepository } from "@/repositories/org-repository"
 import { Organization } from "@prisma/client"
 import  bcrypt  from "bcryptjs"
+import { UserAlreadyExistsError } from "./errors/user-already-existst-error"
 
 const hash = bcrypt.hash
 
@@ -13,6 +13,7 @@ interface RegisterOrgsParams {
     endereco: string
     whatsapp: number
     password: string
+    city: string
 }
 
 interface RegisterOrgResponse {
@@ -23,26 +24,20 @@ export class RegisterOrgsUseCase {
 
     constructor(private orgsRepository: OrgsRepository) { }
 
-    async execute({ name, email, cep, endereco, whatsapp, password }: RegisterOrgsParams): Promise<RegisterOrgResponse> {
+    async execute({ name, email, cep, endereco, whatsapp, password, city }: RegisterOrgsParams): Promise<RegisterOrgResponse> {
         const password_hash = await hash(password, 6)
 
-        const sameWhatsappNumber = await this.orgsRepository.findByEmail(email)
+        const sameEmail = await this.orgsRepository.findByEmail(email)
 
+        const sameWhatsapp = await this.orgsRepository.findByWhatsapp(whatsapp)
 
-        const sameEmail = await prisma.organization.findUnique({
-            where: {
-                email
-            }
-        })
-
-        if (sameWhatsappNumber) {
-            throw new Error('Number already signed')
+        if(sameWhatsapp){
+            throw new UserAlreadyExistsError()
         }
 
-        if (sameEmail) {
-            throw new Error('E-mail not able')
+        if(sameEmail){
+            throw new UserAlreadyExistsError()
         }
-
 
         const org = await this.orgsRepository.create({
             cep,
@@ -51,6 +46,7 @@ export class RegisterOrgsUseCase {
             name,
             password_hash,
             whatsapp,
+            city
         })
 
 

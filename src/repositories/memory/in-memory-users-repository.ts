@@ -9,10 +9,9 @@ export class inMemoryUserRepository implements UserRepository {
 
         const user = {
             id: 'user-id',
-            email: 'test@gmail.com',
-            name: 'user-name',
+            email: data.email,
+            name: data.name,
             password_hash: data.password_hash,
-            created_at: new Date()
         }
 
         this.users.push(user)
