@@ -13,35 +13,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum Age {
-  filhote
-  adulta
-  velhice
-}
-
-enum Body {
-  pequeno
-  medio
-  grande
-}
-
-enum Independence {
-  baixa
-  media
-  alta
-}
-
-enum Energy {
-  baixa
-  media
-  alta
-}
-
-enum Env {
-  amplo
-  fechado
-}
-
 model User {
   id            String @id @default(uuid())
   name          String
@@ -69,15 +40,15 @@ model Pet {
   id           String       @id @default(uuid())
   name         String
   description  String?
-  age          Age          @default(filhote)
-  body         Body         @default(pequeno)
-  energy       Energy       @default(baixa)
-  independence Independence @default(baixa)
-  env          Env          @default(amplo)
+  age          String
+  body         String
+  energy       String
+  independence String
+  env          String
   image        String
   requirements String
-  org_id String
-  org Organization @relation(fields: [org_id], references: [id])
+  org_id       String
+  org          Organization @relation(fields: [org_id], references: [id])
 
   @@map("pets")
 }

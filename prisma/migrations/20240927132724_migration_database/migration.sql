@@ -1,18 +1,3 @@
--- CreateEnum
-CREATE TYPE "Age" AS ENUM ('filhote', 'adulta', 'velhice');
-
--- CreateEnum
-CREATE TYPE "Body" AS ENUM ('pequeno', 'medio', 'grande');
-
--- CreateEnum
-CREATE TYPE "Independence" AS ENUM ('baixa', 'media', 'alta');
-
--- CreateEnum
-CREATE TYPE "Energy" AS ENUM ('baixa', 'media', 'alta');
-
--- CreateEnum
-CREATE TYPE "Env" AS ENUM ('amplo', 'fechado');
-
 -- CreateTable
 CREATE TABLE "users" (
     "id" TEXT NOT NULL,
@@ -42,11 +27,11 @@ CREATE TABLE "pets" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "description" TEXT,
-    "age" "Age" NOT NULL DEFAULT 'filhote',
-    "body" "Body" NOT NULL DEFAULT 'pequeno',
-    "energy" "Energy" NOT NULL DEFAULT 'baixa',
-    "independence" "Independence" NOT NULL DEFAULT 'baixa',
-    "env" "Env" NOT NULL DEFAULT 'amplo',
+    "age" TEXT NOT NULL,
+    "body" TEXT NOT NULL,
+    "energy" TEXT NOT NULL,
+    "independence" TEXT NOT NULL,
+    "env" TEXT NOT NULL,
     "image" TEXT NOT NULL,
     "requirements" TEXT NOT NULL,
     "org_id" TEXT NOT NULL,
