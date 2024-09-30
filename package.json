@@ -2,7 +2,7 @@
   "name": "findafriend",
   "version": "1.0.0",
   "main": "index.js",
-  "type":"module",
+  "type": "module",
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "start": "node build/server.js",
@@ -15,6 +15,7 @@
   "license": "ISC",
   "description": "A simple back-end with SOLID concept",
   "dependencies": {
+    "@fastify/jwt": "9.0.1",
     "@prisma/client": "5.19.1",
     "bcryptjs": "2.4.3",
     "dotenv": "16.4.5",
