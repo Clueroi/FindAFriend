@@ -6,6 +6,7 @@
 - [x] Deve ser possível cadastrar um pet
 - [x] Deve ser possível realizar login como um usuário
 - [x] Deve ser possível realizar login como uma ORG
+- [] Deve ser possível visalizar detalhes do perfil do Usuário e das ORGs
 - [] Deve ser possível visualizar detalhes de um pet para adoção
 - [] Deve ser possível listar todos os pets disponíveis para adoção em uma cidade
 - [] Deve ser possível filtrar pets por suas características
