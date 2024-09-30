@@ -2,7 +2,7 @@ import { makeAuthenticateOrgUseCase } from "@/use-cases/factory/make-authenticat
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
-export function AuthenticateOrg(request: FastifyRequest, reply: FastifyReply) {
+export async function AuthenticateOrg(request: FastifyRequest, reply: FastifyReply) {
     const authenticateBodySchema = z.object({
         email: z.string().email(),
         password: z.string()
@@ -14,11 +14,20 @@ export function AuthenticateOrg(request: FastifyRequest, reply: FastifyReply) {
     try {
         const authenticateOrg = makeAuthenticateOrgUseCase()
 
-        authenticateOrg.execute({
+        const { org } = await authenticateOrg.execute({
             email,
             password
         })
-        return reply.status(200).send()
+
+        const token = await reply.jwtSign({}, {
+            sign: {
+                sub: org.id
+            }
+        })
+
+        return reply.status(200).send({
+            token
+        })
 
     } catch (err) {
         return reply.status(400).send({ message: err })
