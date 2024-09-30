@@ -1,8 +1,9 @@
 import { app } from "@/app";
 import { Register } from "./register";
 import { RegisterPets } from '../pets/register'
-import { AuthenticateOrg } from "./autheticateOrg";
+import { AuthenticateOrg } from "./autheticate";
 import { PetDetails } from "../pets/pet-details";
+import { OrgProfile } from "./profile";
 
 
 export async function RoutesOrganization(){
@@ -10,6 +11,8 @@ export async function RoutesOrganization(){
     app.post('/orgs/sessions', AuthenticateOrg)
 
     // Authenticated
+
+    app.get('/orgs/me', OrgProfile)
 
     app.post('/orgs/pets', RegisterPets)
     app.get('/orgs/pet-details', PetDetails)
