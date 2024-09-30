@@ -1,15 +1,22 @@
 import { inMemoryOrgsRepository } from "@/repositories/memory/in-memory-orgs-repository";
 import { compare } from "bcryptjs";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, beforeAll } from "vitest";
 import { RegisterOrgsUseCase } from "./register-orgs-use-case";
 import { UserAlreadyExistsError } from "./errors/user-already-existst-error";
 
+
+let inMemoryRepository = new inMemoryOrgsRepository()
+let sut = new RegisterOrgsUseCase(inMemoryRepository)
+
 describe('Register Organization Use Case', () => {
+
+    beforeAll(() => {
+        inMemoryRepository = new inMemoryOrgsRepository()
+        sut = new RegisterOrgsUseCase(inMemoryRepository)
+    })
 
     it('should be able to hash org password', async () => {
 
-        const inMemoryRepository = new inMemoryOrgsRepository()
-        const sut = new RegisterOrgsUseCase(inMemoryRepository)
 
         const { org } = await sut.execute({
             name: 'org-name',
