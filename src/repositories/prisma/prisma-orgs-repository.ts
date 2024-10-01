@@ -2,22 +2,32 @@ import { prisma } from "@/lib/prisma";
 import { Organization, Prisma } from "@prisma/client";
 import { OrgsRepository } from "../org-repository";
 
-export class PrismaOrgsRepository implements OrgsRepository{
+export class PrismaOrgsRepository implements OrgsRepository {
 
-    async findByEmail(email: string){
-        const orgs = await prisma.organization.findUnique({
+    async findById(userId: string) {
+        const org = await prisma.organization.findUnique({
             where:{
+                id:userId
+            }
+        })
+
+        return org
+    }
+
+    async findByEmail(email: string) {
+        const orgs = await prisma.organization.findUnique({
+            where: {
                 email
             }
         })
 
-        return orgs   
+        return orgs
     }
 
 
-    async findByWhatsapp(whatsapp: number){
+    async findByWhatsapp(whatsapp: number) {
         const orgs = await prisma.organization.findUnique({
-            where:{
+            where: {
                 whatsapp
             }
         })

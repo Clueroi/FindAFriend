@@ -6,8 +6,8 @@
 - [x] Deve ser possível cadastrar um pet
 - [x] Deve ser possível realizar login como um usuário
 - [x] Deve ser possível realizar login como uma ORG
-- [] Deve ser possível visalizar detalhes do perfil do Usuário e das ORGs
-- [] Deve ser possível visualizar detalhes de um pet para adoção
+- [x] Deve ser possível visalizar detalhes do perfil do Usuário e das ORGs
+- [x] Deve ser possível visualizar detalhes de um pet para adoção
 - [] Deve ser possível listar todos os pets disponíveis para adoção em uma cidade
 - [] Deve ser possível filtrar pets por suas características
 
@@ -26,4 +26,4 @@
 - [x] A senha do usário precisa estar criptografada
 - [x] Os dados da aplicação precisam estar persistidos em um postgres
 - [] Os itens listados precisam estar limitados a 20 itens por página
-- [] Usuário e oORG identificados por um JWT
+- [x] Usuário e oORG identificados por um JWT
