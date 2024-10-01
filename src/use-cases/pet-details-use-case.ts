@@ -1,26 +1,27 @@
-import { prisma } from "@/lib/prisma";
 import { PetRepository } from "@/repositories/pet-repository";
 import { Pet } from "@prisma/client";
 
-interface petRequest{
-    petId: string
+interface petRequest {
+    id: string
 }
 
-interface petResponse{
-    pet:Pet
+interface petResponse {
+    pet: Pet
 }
 
-export class PetDetails{
-    constructor(private petRepository:PetRepository){}
+export class PetDetails {
+    constructor(private petRepository: PetRepository) { }
 
-    async execute({petId}:petRequest){
-        
-        const pet = await prisma.pet.findUnique({
-            where:{
-                id:petId
-            }
-        })
+    async execute({ id }: petRequest): Promise<petResponse> {
 
-        return pet
+        const pet = await this.petRepository.findById(id)
+
+        if (!pet) {
+            throw new Error("Pet not found")
+        }
+
+        return {
+            pet
+        }
     }
-}
+} 

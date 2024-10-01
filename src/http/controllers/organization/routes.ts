@@ -8,12 +8,12 @@ import { OrgProfile } from "./profile";
 
 export async function RoutesOrganization(){
     app.post('/orgs', Register)
-    app.post('/orgs/sessions', AuthenticateOrg)
+    app.post('/orgs/sessions', AuthenticateOrg), 
 
     // Authenticated
 
     app.get('/orgs/me', OrgProfile)
 
     app.post('/orgs/pets', RegisterPets)
-    app.get('/orgs/pet-details', PetDetails)
-}
+    app.get('/orgs/pet-details/:id', PetDetails)
+} 
