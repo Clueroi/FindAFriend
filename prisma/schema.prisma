@@ -40,6 +40,7 @@ model Pet {
   id           String       @id @default(uuid())
   name         String
   description  String?
+  city         String
   age          String
   body         String
   energy       String

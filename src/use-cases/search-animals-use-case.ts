@@ -5,6 +5,7 @@ import { Pet } from "@prisma/client"
 interface SearchAnimalRequest{
     query:string
     page:number
+    city:string
 }
 
 interface SearchAnimalResponse{
@@ -16,8 +17,8 @@ export class SearchAnimals{
 
     constructor(private petRepository: PetRepository){}
 
-    async execute({query, page}: SearchAnimalRequest):Promise<SearchAnimalResponse>{
-        const pets = await this.petRepository.searchMany(query, page)
+    async execute({query, page, city}: SearchAnimalRequest):Promise<SearchAnimalResponse>{
+        const pets = await this.petRepository.searchMany(query, page, city)
         return {
             pets
         }

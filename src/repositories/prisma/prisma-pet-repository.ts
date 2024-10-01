@@ -15,11 +15,14 @@ export class PrismaPetRepository implements PetRepository{
         return pet
     }
     
-    async searchMany(query: string, page: number) {
+    async searchMany(query: string, page: number, city:string) {
         const itensPerPage = 20
 
         return prisma.pet.findMany({
             where:{
+                city:{
+                    contains:city
+                },
                 name:{
                     contains:query
                 },
