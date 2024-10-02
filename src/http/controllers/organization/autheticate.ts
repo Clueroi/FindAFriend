@@ -19,15 +19,36 @@ export async function AuthenticateOrg(request: FastifyRequest, reply: FastifyRep
             password
         })
 
-        const token = await reply.jwtSign({}, {
+        const token = await reply.jwtSign(
+            {
+            role: org.role
+        }, {
             sign: {
                 sub: org.id
             }
         })
 
-        return reply.status(200).send({
-            token
+        const refreshToken = await reply.jwtSign(
+            {
+                role:org.role
+            }, {
+            sign: {
+                sub: org.id,
+                expiresIn: '7d'
+            }
         })
+
+        return reply
+            .setCookie('refreshToken', refreshToken, {
+                path: '/',
+                secure: true,
+                sameSite: true,
+                httpOnly: true
+            })
+            .status(200)
+            .send({
+                token
+            })
 
     } catch (err) {
         return reply.status(400).send({ message: err })
